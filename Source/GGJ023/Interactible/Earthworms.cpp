@@ -5,5 +5,9 @@
 
 void AEarthworms::OnBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	StopStamina();
+	if (!OtherActor->IsA<ACharacter>()) {
+		StopStamina();
+	}
+	
+
 }
