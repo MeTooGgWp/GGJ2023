@@ -14,12 +14,11 @@ class GGJ023_API AFertilizer : public AInteractible
 {
 	GENERATED_BODY()
 public:
-	virtual void OnBeginOverlap_Implementation(
-		UPrimitiveComponent* OverlappedComp,
+	virtual void OnComponentHit_Implementation(
+		UPrimitiveComponent* HitComponent,
 		AActor* OtherActor,
 		UPrimitiveComponent* OtherComp,
-		int32 OtherBodyIndex,
-		bool bFromSweep,
-		const FHitResult& SweepResult
+		FVector NormalImpulse,
+		const FHitResult& Hit
 	) override;
 };

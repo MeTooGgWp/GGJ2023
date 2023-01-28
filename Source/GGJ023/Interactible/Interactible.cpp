@@ -14,12 +14,14 @@ AInteractible::AInteractible()
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	StaticMeshComponent->SetupAttachment(CollisionBox);
 	StaticMeshComponent->SetStaticMesh(StaticMesh);
+	StaticMeshComponent->OnComponentHit.AddDynamic(this, &AInteractible::OnHitComponent);
 }
 
 // Called when the game starts or when spawned
 void AInteractible::BeginPlay()
 {
-	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &AInteractible::OnOverlapBegin);
+	Super::BeginPlay();
+	
 	
 }
 
@@ -30,11 +32,12 @@ void AInteractible::Tick(float DeltaTime)
 
 }
 
-void AInteractible::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AInteractible::OnHitComponent(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	OnBeginOverlap_Implementation(OverlappedComp, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
+	OnComponentHit_Implementation(HitComponent,OtherActor, OtherComp, NormalImpulse, Hit);
 }
 
-void AInteractible::OnBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
+
+void AInteractible::OnComponentHit_Implementation(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+
 }
